@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // ToDo: create "standard" action ?
+// CA_Damage					=> Apply always damage and effect
+// CA_DamageChance				=> Apply sometimes damage and effect
+// CA_DamageAndEffectChance		=> Apply 
 
 namespace Game.Combat {
 	[CreateAssetMenu(fileName = "CA_NewAction", menuName = "Combat/Action", order = 2)]

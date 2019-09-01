@@ -7,8 +7,7 @@ namespace Game.Combat{
 	public class CombatElement: SOArchitecture.Singleton.SingletonScriptableObject<CombatElement> {
 #if UNITY_EDITOR
 		[UnityEditor.MenuItem("Window/Combat/Active Element")]
-		public static void ShowActiveElement()
-		{
+		public static void ShowActiveElement(){
 			UnityEditor.Selection.activeObject = Instance;
 		}
 #endif

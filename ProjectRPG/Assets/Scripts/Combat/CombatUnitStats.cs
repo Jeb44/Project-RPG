@@ -34,7 +34,10 @@ namespace Game.Combat {
 			}
 			set{
 				currentHealth = value;
-				if(currentHealth < 0) currentHealth = 0;
+				if(currentHealth < 0) {
+					currentHealth = 0;
+					IsDead = true;
+				}
 				if(currentHealth > MaxHealth + TemporaryBonusHealth) currentHealth = MaxHealth + TemporaryBonusHealth;
 			}
 		}
@@ -79,6 +82,16 @@ namespace Game.Combat {
 			}
 		}
 
+		[SerializeField] private bool isDead = false;
+		public bool IsDead{
+			get{
+				return isDead;
+			}
+			set{
+				isDead = value;
+			}
+		}
+
 		[SerializeField] private List<ICombatEffect> activeEffects;
 		public List<ICombatEffect> ActiveEffects{
 			get{
@@ -120,30 +133,28 @@ namespace Game.Combat {
 		/// <param name="value">Value to add.</param>
 		/// <param name="element">Value's element.</param>
 		/// <returns>Does the unit survive?</returns>
-		public bool CalculateResultingValue(int value, Element element){
-			if(value == 0){ return true; } // for pure (de)buff spells 
+		public void CalculateResultingValue(int value, Element element){
+			if(value == 0){ return; } // for pure (de)buff spells 
 
 			int enduranceValue = CalculateEndurance(element);
 
 			int resultingValue = value + enduranceValue;
 			CurrentHealth += resultingValue + ((resultingValue >= 0)? 0 : CurrentDefense); // dont add defense bonuses on healing spells!
-
-			if(currentHealth <= 0){
-				return false;
-			}
-			return true;
 		}
 
 		private int CalculateEndurance(Element element){
 			int enduranceValue = (currentResistances.Contains(element))?
 				CombatEndurance.Instance.ResistanceBonusValue : 0;	// +1
+			
 			enduranceValue += (currentWeaknesses.Contains(element))?
 				CombatEndurance.Instance.WeaknessBonusValue : 0;	// -1
+			
 			enduranceValue *= CombatEndurance.Instance.BonusValueModifier;
+			
 			return enduranceValue;
 		}
 	
-			#region Active Effects Methods
+		#region Active Effects Methods
 
 		/// <summary>Add a new effect to the list of active effects.</summary>
 		/// <param name="effect">Effect to add.</param>

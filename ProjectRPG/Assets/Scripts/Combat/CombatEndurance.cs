@@ -6,8 +6,7 @@ namespace Game.Combat{
 	public class CombatEndurance : SOArchitecture.Singleton.SingletonScriptableObject<CombatEndurance> {
 #if UNITY_EDITOR
 		[UnityEditor.MenuItem("Window/Combat/Combat Endurance Values")]
-		public static void ShowCombatEnduranceValues()
-		{
+		public static void ShowCombatEnduranceValues(){
 			UnityEditor.Selection.activeObject = Instance;
 		}
 #endif

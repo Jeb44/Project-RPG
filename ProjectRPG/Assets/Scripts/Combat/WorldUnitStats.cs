@@ -43,6 +43,16 @@ namespace Game.Combat {
 		public List<Element> Resistances;
 		public List<Element> Weaknesses;
 
+		[SerializeField] private bool isDead = false;
+		public bool IsDead{
+			get{
+				return isDead;
+			}
+			set{
+				isDead = value;
+			}
+		}
+
 		[Header("Changed via CombatUnitStats!")]
 		[SerializeField] private IntReference currentHealth;
 		public int CurrentHealth{
@@ -51,18 +61,23 @@ namespace Game.Combat {
 			}
 			set {
 				currentHealth = value;
-				if(currentHealth < 0) currentHealth = 0; // Player dead! Some kind of function call?
+				if(currentHealth < 0) {
+					currentHealth = 0; 
+					IsDead = true;
+				}
 				if(currentHealth > MaxHealth) currentHealth = MaxHealth;
 			}
 		}
 		
 		///<summary>Call this to reset currentHealth to maxHealth.</summary>
 		public void ResetCurrentHealth(){
+			IsDead = false;
 			CurrentHealth = MaxHealth;
 		}
 
 		///<summary>Apply currentHealth from combatUnit to worldUnit.</summary>
 		public void TransferNewStats(CombatUnitStats newStats){
+			this.isDead = newStats.IsDead;
 			this.CurrentHealth = newStats.CurrentHealth;
 			// other stats ...
 		}

@@ -16,8 +16,28 @@ namespace Game.Combat {
 		public List<CombatUnitHolder> party;
 		public List<CombatUnitHolder> enemies;
 
+		void Init(){
+			OnCombatInit();
+		}
+
+		void Start(){
+			OnCombatStart();
+		}
+
+		void Update(){
+			// Do stuff
+
+			// if endCombat -> OnCombatEnd();
+
+		}
+
+		void Destroy(){
+			OnCombatDestroy();
+		}
+
+		///<summary>Init Combat Scene (Refereces) </summary>
 		public virtual void OnCombatInit(){
-			// ?
+
 		}
 
 		#region Unit Management
@@ -48,24 +68,19 @@ namespace Game.Combat {
 		
 		#endregion
 
+		///<summary>Start Combat</summary>
 		public virtual void OnCombatStart(){
-			InitPartyUnits();
-			InitEnemyUnits();
+			foreach(var unit in party){
+				unit.OnCombatStart();
+			}
+			foreach(var unit in enemies){
+				unit.OnCombatStart();
+			}
 
 			CombatElement.Instance.ActiveElement = Element.Neutral;
 		}
 
-		private void InitPartyUnits(){
-			foreach(var unit in party){
-				unit.OnCombatStart();
-			}
-		}
-		private void InitEnemyUnits(){
-			foreach(var unit in enemies){
-				unit.OnCombatStart();
-			}
-		}
-
+		///<summary>End Combat</summary>
 		public virtual void OnCombatEnd(){
 			ApplyTemporaryStatsToWorld();
 		}
@@ -76,6 +91,11 @@ namespace Game.Combat {
 			}
 		}
 		
+		///<summary>Destroy Combat Scene</summary>
+		public virtual void OnCombatDestroy(){
+
+		}
+
 	}
 }
 

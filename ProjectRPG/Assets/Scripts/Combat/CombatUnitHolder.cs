@@ -25,11 +25,11 @@ namespace Game.Combat {
 			combatStats = null;
 		}
 
-		/// <summary>Calculate receiving damage from action.</summary>
+		/// <summary>Perform an specified action upon this unit.</summary>
 		/// <param name="action">Action that hits the unit.</param>
-		/// <param name="unitAttackValue">Attack value of the attacking unit (required for damage formula).</param>
+		/// <param name="unitAttackValue">Attack value of the attacking unit (combat stats attack value).</param>
 		/// <returns>Does the unit survive?</returns>
-		public bool ExecuteActionOnUnit(ICombatAction action, int unitAttackValue) {
+		public bool ExecuteActionOnThisUnit(ICombatAction action, int unitAttackValue) {
 			// Note: Put this in CUS?
 			int totalValue = action.GetValue() + unitAttackValue;
 			
@@ -47,7 +47,7 @@ namespace Game.Combat {
 
 			CombatElement.Instance.ActiveElement = action.element;
 			
-			return true;
+			return !combatStats.IsDead;
 		}
 
 		#region ExecuteActionOnUnit Refactoring
