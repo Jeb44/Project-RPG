@@ -22,6 +22,15 @@ namespace Game.Combat{
 				return activeElement;
 			}
 			set{
+				if(value == Element.Light) {
+					return;
+				}
+
+				if(value == Element.Dark){
+					activeElement = activeElement.GetOppositeElement();
+					return;
+				}
+				
 				activeElement = value;
 			}
 		}

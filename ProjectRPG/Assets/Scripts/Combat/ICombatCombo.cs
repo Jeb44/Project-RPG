@@ -8,7 +8,7 @@ using SOArchitecture.Reference;
 namespace Game.Combat {
 	[CreateAssetMenu(fileName = "CC_NewCombo", menuName = "Combat/Combo", order = 4)]
 	///<summary>Saves data about a combo with their triggers and possible effects. Overwrite this class to create more specific combo's.</summary>
-	public class ICombatCombo : ScriptableObject {
+	public abstract class ICombatCombo : ScriptableObject {
 		public StringReference title;
 		public Element[] triggers = new Element[1]; //Write Custom Inspector with OnInspectorGUI() to check that the array min size is 1
 		public IntReference value;

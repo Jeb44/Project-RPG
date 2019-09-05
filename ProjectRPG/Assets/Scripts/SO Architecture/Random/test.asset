@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 263de657cdc309c43b50352ad94fc0c4, type: 3}
   m_Name: test
   m_EditorClassIdentifier: 
-  startValue: 1
-  endValue: 6
+  minValue: 1
+  maxValue: 6

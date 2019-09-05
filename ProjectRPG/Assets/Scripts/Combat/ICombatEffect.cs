@@ -9,7 +9,7 @@ using System;
 namespace Game.Combat {
 	[CreateAssetMenu(fileName = "CE_NewEffect", menuName = "Combat/Effect", order = 3)]
 	///<summary>Saves data about an effect with duration and turnCount. Overwrite this class to create more specific effects's.</summary>
-	public class ICombatEffect : ScriptableObject {
+	public abstract class ICombatEffect : ScriptableObject {
 		public StringReference title;
 		public StringReference description;
 		public IntReference duration;
