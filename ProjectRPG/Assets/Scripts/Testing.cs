@@ -20,7 +20,7 @@ public class Testing : MonoBehaviour
 
 	private CombatUnitStats stat;
 
-	void Start(){		
+	void Start(){
 		UpdateHP();
 	}
 

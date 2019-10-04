@@ -1,18 +1,7 @@
 ﻿using SOArchitecture.Reference;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using SOArchitecture.Random;
-
-// ToDo: create "standard" action ? [true, false, chance]
-// damage = false => value = 0
-// damage = true => value < 0 || value > 0
-// Effect always chance! 
-
-// Random mechanic -> dice roll!
 
 namespace Game.Combat {
-	// [CreateAssetMenu(fileName = "CA_NewAction", menuName = "Combat/Action", order = 2)]
 	///<summary>Saves data about an action and their possible effects and combo's. Overwrite this class to create more specific actions.</summary>
 	public abstract class ICombatAction : ScriptableObject {
 		[Tooltip("Name of the action.")]
@@ -40,7 +29,7 @@ namespace Game.Combat {
 		/// <summary>Get action effects based on effectChance. Overwrite to modify list of effects before giving it to unit.</summary>
 		///<returns>Return all effects or none.</returns>
 		public virtual ICombatEffect[] GetEffects(){
-			if(effectChance >= Random.value){
+			if(effectChance <= Random.value){
 				return new ICombatEffect[0];
 			}
 			return effects;

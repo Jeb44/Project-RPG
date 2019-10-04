@@ -7,19 +7,22 @@ using System;
 // ToDo: create "standard" effect ?
 
 namespace Game.Combat {
-	[CreateAssetMenu(fileName = "CE_NewEffect", menuName = "Combat/Effect", order = 3)]
 	///<summary>Saves data about an effect with duration and turnCount. Overwrite this class to create more specific effects's.</summary>
 	public abstract class ICombatEffect : ScriptableObject {
+		[Tooltip("Name of the effect.")]
 		public StringReference title;
+
+		[Tooltip("Description shown in the game.")]
 		public StringReference description;
+
+		[Tooltip("Number of turns this effect prevails.")]
 		public IntReference duration;
 
 		private IntReference turnCount;
 
 		/// <summary>Do something when the effect first hits.</summary>
 		/// <param name="target">Unit that is affected.</param>
-		public virtual void OnHit(CombatUnitStats target) {
-		}
+		public virtual void OnHit(CombatUnitStats target) {}
 
 		/// <summary>Do something on any round of the effect duration. Use "turnCount" to apply effects at specific rounds. Please call "Base Function" when overwriting this method.</summary>
 		/// <param name="target">Unit that is affected.</param>
